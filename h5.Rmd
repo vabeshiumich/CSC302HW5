@@ -1,0 +1,118 @@
+---
+title: "HW5"
+output: html_document
+date: "2025-04-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## head(house_prices)
+
+library(ggplot2)
+
+'''
+
+prompt : create a faceted line plot using ggplot2 to show the trend of
+
+house_price_index over the years for each state with cusom ticks on the x axis
+
+80 for 1980, 00 for 2000 and 20 for 2020
+
+'''
+
+ggplot(house_prices, aes(x = date, y = house_price_index)) +
+
+geom_line() +
+
+facet_wrap(\~ state) +
+
+scale_x_continuous(breaks = c(1980, 2000, 2020),
+
+labels = c("’80", "’00", "’20")) +
+
+labs(x = "Year", y = "House Price Index",
+
+title = "Trends in House Price Index by State (1980–2020)") +
+
+theme_minimal()
+
+'''
+
+prompt : use gather() from tidyr to reshape the data ub a way that it will have
+
+measure and value columns for house_price_index and unemploy_perc, respectively,
+
+in two columns. You should leave out remaining attributes by using ”-” in front
+
+them inside the function. Then, direct the output to a new data frame called
+
+house_reshaped
+
+'''
+
+library(tidyr)
+
+house_reshaped \<- gather(house_prices,
+
+key = "measure",
+
+value = "value",
+
+-date,
+
+-state)
+
+ggplot(house_prices, aes(x = date, y = house_price_index)) +
+
+geom_line() +
+
+facet_wrap(\~ state) +
+
+scale_x_continuous(breaks = c(1980, 2000, 2020),
+
+labels = c("’80", "’00", "’20")) +
+
+labs(x = "Year", y = "House Price Index",
+
+title = "Trends in House Price Index by State (1980–2020)") +
+
+theme_minimal()
+
+```{r}
+head(house_prices)
+
+library(ggplot2)
+
+
+
+ggplot(house_prices, aes(x = date, y = house_price_index)) +
+  geom_line() +
+  facet_wrap(~ state) +
+  scale_x_continuous(breaks = c(1980, 2000, 2020),
+                     labels = c("’80", "’00", "’20")) +
+  labs(x = "Year", y = "House Price Index",
+       title = "Trends in House Price Index by State (1980–2020)") +
+  theme_minimal()
+
+
+
+library(tidyr)
+
+house_reshaped <- gather(house_prices,
+                         key = "measure", 
+                         value = "value", 
+                         -date, 
+                         -state)
+
+ggplot(house_prices, aes(x = date, y = house_price_index)) +
+  geom_line() +
+  facet_wrap(~ state) +
+  scale_x_continuous(breaks = c(1980, 2000, 2020),
+                     labels = c("’80", "’00", "’20")) +
+  labs(x = "Year", y = "House Price Index",
+       title = "Trends in House Price Index by State (1980–2020)") +
+  theme_minimal()
+
+```
